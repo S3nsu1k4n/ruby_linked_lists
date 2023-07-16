@@ -13,9 +13,7 @@ class LinkedList
     if @head_node.nil?
       @head_node = Node.new(value)
     else
-      node = @head_node
-      node = node.next_node until node.next_node.nil?
-      node.next_node = Node.new(value)
+      tail.next_node = Node.new(value)
     end
   end
 
@@ -25,25 +23,67 @@ class LinkedList
   end
 
   # returns the total number of nodes in the list
-  def size; end
+  def size
+    size = 0
+    each_node_with_index { |_, index| size = index}
+    size + 1
+  end
+
+  def each_node
+    node = @head_node
+    yield node
+    until node.next_node.nil?
+      node = node.next_node
+      yield node
+    end
+  end
+
+  def each_node_with_index
+    index = 0
+    each_node do |node|
+      yield node, index
+      index += 1
+    end
+  end
 
   # returns the first node in the list
-  def head; end
+  def head
+    @head_node
+  end
 
   # returns the last node in the list
-  def tail; end
+  def tail
+    last_node = nil
+    each_node { |node| last_node = node}
+    last_node
+  end
 
   # returns the node at the given index
-  def at(index); end
+  def at(index)
+    each_node_with_index do |node, i|
+      return node if index == i
+    end
+  end
 
   # removes the last element from the list
-  def pop; end
+  def pop
+    at(size - 2).next_node = nil
+  end
 
   # returns true if the passed in value is in the list and other returns false
-  def contains?(value); end
+  def contains?(value)
+    each_node do |node|
+      return true if node.value == value
+    end
+    false
+  end
 
-  # returns the indes of the node containing value, or nil if not found
-  def find(value); end
+  # returns the index of the node containing value, or nil if not found
+  def find(value)
+    each_node_with_index do |node, index|
+      return index if node.value == value
+    end
+  end
 
   # represent your LinkedList objects as string, so you can print them out and preview them in the console
   # The format should be: ( value ) -> ( value ) -> ( value ) -> nil
