@@ -21,8 +21,7 @@ class LinkedList
 
   # adds a new node containing "value" to the start of the list
   def prepend(value)
-    node = @head_node
-    @head_node = Node.new(value, node)
+    @head_node = Node.new(value, @head_node)
   end
 
   # returns the total number of nodes in the list
