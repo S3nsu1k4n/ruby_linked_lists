@@ -11,4 +11,6 @@ llist.append(4)
 llist.append(5)
 llist.append(6)
 llist.append(7)
+
+llist.prepend(0)
 puts llist
