@@ -26,3 +26,6 @@ puts llist.contains? 6
 
 puts llist.find 'test'
 puts llist.find 3
+
+llist.insert_at(9, 4)
+puts llist

@@ -99,7 +99,11 @@ class LinkedList
   end
 
   # that insert a new node with the provided value at the given index
-  def insert_at(value, index); end
+  def insert_at(value, index)
+    node_before_index = at(index - 1)
+    node_at_index = node_before_index.next_node
+    node_before_index.next_node = Node.new(value, node_at_index)
+  end
 
   # that removes the node at the given "index"
   def remove_at(index); end
