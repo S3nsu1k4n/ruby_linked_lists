@@ -29,3 +29,5 @@ puts llist.find 3
 
 llist.insert_at(9, 4)
 puts llist
+llist.remove_at(9)
+puts llist

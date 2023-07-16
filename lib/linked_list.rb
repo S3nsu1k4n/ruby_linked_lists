@@ -106,5 +106,9 @@ class LinkedList
   end
 
   # that removes the node at the given "index"
-  def remove_at(index); end
+  def remove_at(index)
+    node_before_index = at(index - 1)
+    node_after_index = node_before_index.next_node.next_node
+    node_before_index.next_node = node_after_index
+  end
 end
